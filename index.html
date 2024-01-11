@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zamazon</title>
+    <!-- Add this within the <head> section of your HTML document -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #000000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 80vh;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+        h1 {
+            margin-right: 20px;
+            color: #d7a91e;
+        }
+        img{
+            margin-top: -600px;
+        }
+
+        form {
+            width: 80%;
+            max-width: 400px;
+            padding: 15px;
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-sizing: border-box;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 10px;
+            margin-right: auto;
+            margin-left: 10px;  
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #e6b208e8;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #e59108;
+        }
+
+        #responseContainer {
+            width: 80%;
+            max-width: 400px;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            box-sizing: border-box;
+            margin-top: 20px;
+            margin-left: 2px;
+            margin-right: 10px;
+        }
+
+        #shareLocationBtn {
+            background-color: #e6b208e8;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-bottom: 16px;
+            transition: background-color 0.3s;
+        }
+
+        #shareLocationBtn:hover {
+            background-color: #e59108;
+        }
+        html, body {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+overflow: hidden;
+}
+.snowflake {
+  --size: 1vw;
+  width: var(--size);
+  height: var(--size);
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+  top: -5vh;
+}
+
+@keyframes snowfall {
+  0% {
+    transform: translate3d(var(--left-ini), 0, 0);
+  }
+  100% {
+    transform: translate3d(var(--left-end), 110vh, 0);
+  }
+}
+.snowflake:nth-child(1) {
+  --size: 0.8vw;
+  --left-ini: 4vw;
+  --left-end: 10vw;
+  left: 40vw;
+  animation: snowfall 12s linear infinite;
+  animation-delay: -6s;
+}
+
+.snowflake:nth-child(2) {
+  --size: 0.8vw;
+  --left-ini: 10vw;
+  --left-end: -3vw;
+  left: 44vw;
+  animation: snowfall 8s linear infinite;
+  animation-delay: -6s;
+}
+
+.snowflake:nth-child(3) {
+  --size: 0.2vw;
+  --left-ini: 0vw;
+  --left-end: 8vw;
+  left: 95vw;
+  animation: snowfall 10s linear infinite;
+  animation-delay: -4s;
+}
+
+.snowflake:nth-child(4) {
+  --size: 0.6vw;
+  --left-ini: 6vw;
+  --left-end: 8vw;
+  left: 52vw;
+  animation: snowfall 6s linear infinite;
+  animation-delay: -6s;
+}
+
+.snowflake:nth-child(5) {
+  --size: 0.6vw;
+  --left-ini: 1vw;
+  --left-end: 5vw;
+  left: 9vw;
+  animation: snowfall 14s linear infinite;
+  animation-delay: -9s;
+}
+
+.snowflake:nth-child(6) {
+  --size: 1vw;
+  --left-ini: -3vw;
+  --left-end: 10vw;
+  left: 72vw;
+  animation: snowfall 8s linear infinite;
+  animation-delay: -6s;
+}
+
+.snowflake:nth-child(7) {
+  --size: 0.8vw;
+  --left-ini: -4vw;
+  --left-end: 0vw;
+  left: 32vw;
+  animation: snowfall 8s linear infinite;
+  animation-delay: -3s;
+}
+
+.snowflake:nth-child(8) {
+  --size: 0.4vw;
+  --left-ini: -8vw;
+  --left-end: -3vw;
+  left: 62vw;
+  animation: snowfall 10s linear infinite;
+  animation-delay: -6s;
+}
+
+.snowflake:nth-child(9) {
+  --size: 0.6vw;
+  --left-ini: -9vw;
+  --left-end: 5vw;
+  left: 24vw;
+  animation: snowfall 12s linear infinite;
+  animation-delay: -8s;
+}
+
+.snowflake:nth-child(10) {
+  --size: 0.8vw;
+  --left-ini: 9vw;
+  --left-end: -5vw;
+  left: 30vw;
+  animation: snowfall 13s linear infinite;
+  animation-delay: -5s;
+}
+
+.snowflake:nth-child(11) {
+  --size: 0.6vw;
+  --left-ini: 7vw;
+  --left-end: -9vw;
+  left: 17vw;
+  animation: snowfall 12s linear infinite;
+  animation-delay: -2s;
+}
+
+.snowflake:nth-child(12) {
+  --size: 0.4vw;
+  --left-ini: 7vw;
+  --left-end: 4vw;
+  left: 63vw;
+  animation: snowfall 11s linear infinite;
+  animation-delay: -7s;
+}
+
+.snowflake:nth-child(13) {
+  --size: 0.8vw;
+  --left-ini: 5vw;
+  --left-end: 5vw;
+  left: 55vw;
+  animation: snowfall 7s linear infinite;
+  animation-delay: -10s;
+}
+
+.snowflake:nth-child(14) {
+  --size: 0.2vw;
+  --left-ini: 5vw;
+  --left-end: -1vw;
+  left: 13vw;
+  animation: snowfall 12s linear infinite;
+  animation-delay: -10s;
+}
+
+.snowflake:nth-child(15) {
+  --size: 0.6vw;
+  --left-ini: 2vw;
+  --left-end: 0vw;
+  left: 70vw;
+  animation: snowfall 11s linear infinite;
+  animation-delay: -5s;
+}
+
+.snowflake:nth-child(16) {
+  --size: 1vw;
+  --left-ini: 9vw;
+  --left-end: 3vw;
+  left: 76vw;
+  animation: snowfall 11s linear infinite;
+  animation-delay: -6s;
+}
+
+.snowflake:nth-child(17) {
+  --size: 0.2vw;
+  --left-ini: 1vw;
+  --left-end: 2vw;
+  left: 13vw;
+  animation: snowfall 12s linear infinite;
+  animation-delay: -10s;
+}
+
+.snowflake:nth-child(18) {
+  --size: 1vw;
+  --left-ini: 10vw;
+  --left-end: 6vw;
+  left: 16vw;
+  animation: snowfall 9s linear infinite;
+  animation-delay: -3s;
+}
+
+.snowflake:nth-child(19) {
+  --size: 0.4vw;
+  --left-ini: -2vw;
+  --left-end: -7vw;
+  left: 89vw;
+  animation: snowfall 14s linear infinite;
+  animation-delay: -7s;
+}
+
+.snowflake:nth-child(20) {
+  --size: 0.8vw;
+  --left-ini: -3vw;
+  --left-end: -5vw;
+  left: 59vw;
+  animation: snowfall 6s linear infinite;
+  animation-delay: -10s;
+}
+
+.snowflake:nth-child(21) {
+  --size: 0.6vw;
+  --left-ini: -4vw;
+  --left-end: 0vw;
+  left: 46vw;
+  animation: snowfall 9s linear infinite;
+  animation-delay: -5s;
+}
+
+.snowflake:nth-child(22) {
+  --size: 0.8vw;
+  --left-ini: -6vw;
+  --left-end: 5vw;
+  left: 82vw;
+  animation: snowfall 13s linear infinite;
+  animation-delay: -2s;
+}
+
+.snowflake:nth-child(23) {
+  --size: 0.8vw;
+  --left-ini: 0vw;
+  --left-end: 10vw;
+  left: 6vw;
+  animation: snowfall 14s linear infinite;
+  animation-delay: -6s;
+}
+
+.snowflake:nth-child(24) {
+  --size: 1vw;
+  --left-ini: 2vw;
+  --left-end: -8vw;
+  left: 79vw;
+  animation: snowfall 15s linear infinite;
+  animation-delay: -1s;
+}
+
+.snowflake:nth-child(25) {
+  --size: 0.2vw;
+  --left-ini: -1vw;
+  --left-end: 10vw;
+  left: 83vw;
+  animation: snowfall 8s linear infinite;
+  animation-delay: -8s;
+}
+
+.snowflake:nth-child(26) {
+  --size: 0.2vw;
+  --left-ini: -4vw;
+  --left-end: 6vw;
+  left: 41vw;
+  animation: snowfall 10s linear infinite;
+  animation-delay: -1s;
+}
+
+.snowflake:nth-child(27) {
+  --size: 0.8vw;
+  --left-ini: 9vw;
+  --left-end: -4vw;
+  left: 72vw;
+  animation: snowfall 9s linear infinite;
+  animation-delay: -10s;
+}
+
+.snowflake:nth-child(28) {
+  --size: 0.6vw;
+  --left-ini: 1vw;
+  --left-end: -5vw;
+  left: 88vw;
+  animation: snowfall 8s linear infinite;
+  animation-delay: -3s;
+}
+
+.snowflake:nth-child(29) {
+  --size: 0.2vw;
+  --left-ini: 3vw;
+  --left-end: 10vw;
+  left: 54vw;
+  animation: snowfall 8s linear infinite;
+  animation-delay: -3s;
+}
+
+.snowflake:nth-child(30) {
+  --size: 0.2vw;
+  --left-ini: -5vw;
+  --left-end: 1vw;
+  left: 44vw;
+  animation: snowfall 15s linear infinite;
+  animation-delay: -8s;
+}
+
+.snowflake:nth-child(31) {
+  --size: 0.4vw;
+  --left-ini: 2vw;
+  --left-end: -4vw;
+  left: 65vw;
+  animation: snowfall 15s linear infinite;
+  animation-delay: -7s;
+}
+
+.snowflake:nth-child(32) {
+  --size: 1vw;
+  --left-ini: -5vw;
+  --left-end: -2vw;
+  left: 6vw;
+  animation: snowfall 10s linear infinite;
+  animation-delay: -9s;
+}
+
+.snowflake:nth-child(33) {
+  --size: 0.8vw;
+  --left-ini: 3vw;
+  --left-end: 4vw;
+  left: 56vw;
+  animation: snowfall 10s linear infinite;
+  animation-delay: -10s;
+}
+
+.snowflake:nth-child(34) {
+  --size: 1vw;
+  --left-ini: 5vw;
+  --left-end: 4vw;
+  left: 72vw;
+  animation: snowfall 6s linear infinite;
+  animation-delay: -8s;
+}
+
+.snowflake:nth-child(35) {
+  --size: 0.6vw;
+  --left-ini: 0vw;
+  --left-end: 7vw;
+  left: 31vw;
+  animation: snowfall 12s linear infinite;
+  animation-delay: -2s;
+}
+
+.snowflake:nth-child(36) {
+  --size: 0.6vw;
+  --left-ini: 2vw;
+  --left-end: -9vw;
+  left: 60vw;
+  animation: snowfall 12s linear infinite;
+  animation-delay: -9s;
+}
+
+.snowflake:nth-child(37) {
+  --size: 1vw;
+  --left-ini: -7vw;
+  --left-end: 8vw;
+  left: 75vw;
+  animation: snowfall 10s linear infinite;
+  animation-delay: -10s;
+}
+
+.snowflake:nth-child(38) {
+  --size: 0.4vw;
+  --left-ini: 3vw;
+  --left-end: -1vw;
+  left: 57vw;
+  animation: snowfall 12s linear infinite;
+  animation-delay: -3s;
+}
+
+.snowflake:nth-child(39) {
+  --size: 0.8vw;
+  --left-ini: 5vw;
+  --left-end: -9vw;
+  left: 38vw;
+  animation: snowfall 9s linear infinite;
+  animation-delay: -8s;
+}
+
+.snowflake:nth-child(40) {
+  --size: 1vw;
+  --left-ini: 9vw;
+  --left-end: 7vw;
+  left: 37vw;
+  animation: snowfall 6s linear infinite;
+  animation-delay: -10s;
+}
+
+.snowflake:nth-child(41) {
+  --size: 0.4vw;
+  --left-ini: -6vw;
+  --left-end: -5vw;
+  left: 46vw;
+  animation: snowfall 12s linear infinite;
+  animation-delay: -7s;
+}
+
+.snowflake:nth-child(42) {
+  --size: 1vw;
+  --left-ini: -4vw;
+  --left-end: 0vw;
+  left: 15vw;
+  animation: snowfall 7s linear infinite;
+  animation-delay: -10s;
+}
+
+.snowflake:nth-child(43) {
+  --size: 1vw;
+  --left-ini: -6vw;
+  --left-end: 0vw;
+  left: 78vw;
+  animation: snowfall 14s linear infinite;
+  animation-delay: -1s;
+}
+
+.snowflake:nth-child(44) {
+  --size: 0.2vw;
+  --left-ini: -7vw;
+  --left-end: 1vw;
+  left: 71vw;
+  animation: snowfall 12s linear infinite;
+  animation-delay: -8s;
+}
+
+.snowflake:nth-child(45) {
+  --size: 1vw;
+  --left-ini: 4vw;
+  --left-end: 8vw;
+  left: 15vw;
+  animation: snowfall 6s linear infinite;
+  animation-delay: -3s;
+}
+
+.snowflake:nth-child(46) {
+  --size: 0.8vw;
+  --left-ini: -6vw;
+  --left-end: -7vw;
+  left: 48vw;
+  animation: snowfall 12s linear infinite;
+  animation-delay: -2s;
+}
+
+.snowflake:nth-child(47) {
+  --size: 0.4vw;
+  --left-ini: 1vw;
+  --left-end: 1vw;
+  left: 97vw;
+  animation: snowfall 6s linear infinite;
+  animation-delay: -7s;
+}
+
+.snowflake:nth-child(48) {
+  --size: 1vw;
+  --left-ini: -2vw;
+  --left-end: 9vw;
+  left: 98vw;
+  animation: snowfall 10s linear infinite;
+  animation-delay: -2s;
+}
+
+.snowflake:nth-child(49) {
+  --size: 0.2vw;
+  --left-ini: -5vw;
+  --left-end: -4vw;
+  left: 54vw;
+  animation: snowfall 6s linear infinite;
+  animation-delay: -3s;
+}
+
+.snowflake:nth-child(50) {
+  --size: 0.6vw;
+  --left-ini: -3vw;
+  --left-end: 6vw;
+  left: 11vw;
+  animation: snowfall 6s linear infinite;
+  animation-delay: -9s;
+}
+
+/* added small blur every 6 snowflakes*/
+.snowflake:nth-child(6n) {
+  filter: blur(1px);
+}
+    </style>
+</head>
+<body>
+    
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+<div class="snowflake"></div>
+</a>
+    <img src="logos_white.png" height="160" width="160" alt="logo" class="logo">
+    <h1>Contact Identification Form</h1>
+
+    <form id="contactForm" action="http://localhost:3000/identify" method="post">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+
+        <br>
+
+        <label for="phoneNumber">Phone Number</label>
+        <input type="tel" id="phoneNumber" name="phoneNumber" required>
+        <label for="latitude"></label>
+        <input type="hidden" id="latitude" name="latitude" readonly>
+        <label for="longitude"></label>
+        <input type="hidden" id="longitude" name="longitude" readonly>
+        <!-- Add "Share Location" button -->
+        <button id="shareLocationBtn" type="button">Share Location</button>
+
+        <br>
+
+        <button type="submit">Find Contact</button>
+    </form>
+
+    <div id="responseContainer"></div>
+
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const form = event.target;
+            const formData = new FormData(form);
+
+            fetch(form.action, {
+                method: form.method,
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(Object.fromEntries(formData)),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Server Response:', data);
+
+                // Update the DOM with the server response
+                const responseContainer = document.getElementById('responseContainer');
+                responseContainer.innerHTML = `
+                    <p>Status: ${data.primaryContactId ? 'Primary User Found' : 'Error'}</p>
+                    <p>Primary Contact ID: ${data.primaryContactId || 'N/A'}</p>
+                    <p>Emails: ${data.emails.join(', ')}</p>
+                    <p>Phone Numbers: ${data.phoneNumbers.join(', ')}</p>
+                    <p>Secondary Contact IDs: ${data.secondaryContactIds.join(', ')}</p>
+                `;
+            })
+            .catch(error => console.error('Error:', error));
+        });
+
+        // Add event listener for "Share Location" button
+        document.getElementById('shareLocationBtn').addEventListener('click', function() {
+            if ('geolocation' in navigator) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const { latitude, longitude } = position.coords;
+
+                        // Set the obtained location in the form fields
+                        document.getElementById('latitude').value = latitude;
+                        document.getElementById('longitude').value = longitude;
+                    },
+                    (error) => {
+                        alert(`Error getting location: ${error.message}`);
+                    }
+                );
+            } else {
+                alert('Geolocation is not supported by your browser');
+            }
+        });
+    </script>
+</body>
+</html>
