@@ -5,6 +5,7 @@ To get started with the assignment, follow these steps:
 
 1. Download and extract the files or clone the repository using the following command:
       `git clone https://github.com/JaiPrasanth077/Emotorad-Back-End-Assignment.git`
+
 2.Open the folder containing the files using VSCode.
 
 3.After opening VSCode, start a new terminal and navigate to the main directory containing all the files.
